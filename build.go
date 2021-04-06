@@ -1,6 +1,9 @@
 package build
 
-import "runtime"
+import (
+	"encoding/json"
+	"runtime"
+)
 
 // define replaceable variables
 var (
@@ -22,7 +25,13 @@ type Build struct {
 	Engine      string `json:"engine"`
 }
 
+func (b Build) String() string {
+	data, _ := json.Marshal(b)
+	return string(data)
+}
+
 // Retrieve current build info func
+//goland:noinspection GoUnusedExportedFunction
 func GetBuildInfo() Build {
 	return Build{
 		Version:     version,
